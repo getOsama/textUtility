@@ -1,9 +1,11 @@
 nav{
     .container-fluid{
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        // border-color: 5px solid red;
+        ul{
+            li{
+                a{
+                    color: #fff;
+                }
+            }
+        }
     }
 }
