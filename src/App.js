@@ -10,6 +10,7 @@ import Alert from './Components/Alert';
 import {
   BrowserRouter as Router,
   Switch,
+  
   Route,
   Routes,
   Link
@@ -57,7 +58,7 @@ function App() {
         <Routes>
             <Route exact path="/" element={<Textform navMode={mode} toggle={toggleHandler} showAlert={showAlert}/>}>
             </Route>
-            <Route exact path="/about" element={<About/>}>
+            <Route exact path="/about" element={<About navMode={mode}/>}>
             </Route>
           </Routes>
     </Router>

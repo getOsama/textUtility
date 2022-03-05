@@ -17,8 +17,9 @@ const copyHandler = () =>{
     var newText = document.getElementById("textArea")
     newText.select()
     navigator.clipboard.writeText(newText.value)
+    document.getSelection().removeAllRanges(); // use to remove selection, made by select()
     // setText(newText)
-    props.showAlert("Text Copied", "danger")
+    props.showAlert("Text Copied", "success")
 }
 const upperCaseHandler = () =>{
     console.log("button clicked")
@@ -85,24 +86,24 @@ const onChangeHandler = (event) =>{
            <div>
                 <h2 className={`text-${props.navMode==='dark'?'light':'light'}`}>Type Text</h2>
                 <textarea className="form-control" onChange={onChangeHandler} value={text} id="textArea" rows="3"></textarea>
-                <button className='btn btn-light mt-4 mx-2' onClick={clearTextHandler}>Clear</button>
-                <button className='btn btn-light mt-4 mx-2' onClick={copyHandler}>Copy Text</button>
-                <button className='btn btn-light mt-4 mx-2' onClick={upperCaseHandler}>UpperCase</button>
-                <button className='btn btn-light mt-4 mx-2' onClick={lowerCaseHandler}>LowerCase</button>
-                <button className='btn btn-light mt-4 mx-2' onClick={titleCaseHandler}>TitleCase</button>
-                <button className='btn btn-light mt-4 mx-2' onClick={sentenseCaseHandler}>SentenseCase</button>
+                <button disabled={text.length===0} className='btn btn-light mt-4 mx-2' onClick={clearTextHandler}>Clear</button>
+                <button disabled={text.length===0} className='btn btn-light mt-4 mx-2' onClick={copyHandler}>Copy Text</button>
+                <button disabled={text.length===0} className='btn btn-light mt-4 mx-2' onClick={upperCaseHandler}>UpperCase</button>
+                <button disabled={text.length===0} className='btn btn-light mt-4 mx-2' onClick={lowerCaseHandler}>LowerCase</button>
+                <button disabled={text.length===0} className='btn btn-light mt-4 mx-2' onClick={titleCaseHandler}>TitleCase</button>
+                <button disabled={text.length===0} className='btn btn-light mt-4 mx-2' onClick={sentenseCaseHandler}>SentenseCase</button>
            </div>
            {/* <div>
                 <button mode='modeHanlder' onClick={toggleMode} className='btn btn-info mt-4 mx-2'>{btnText}</button>
            </div> */}
            <div className={`text-${props.navMode==='dark'?'light':'light'}`}>
                 <h2 className='mt-3'>Text Summary</h2>
-                <p>{text.split(' ').length} words and {text.length} characters</p>
-                <p>{0.008 * text.split(' ').length} Minutes Read </p>
+                <p>{text.split(/\s+/).filter(element=>{return element.length!==0}).length} words and {text.length} characters</p>
+                <p>{0.008 * text.split(' ').filter(element=>{return element.length!==0}).length} Minutes Read </p>
            </div>
            <div className={`text-${props.navMode==='dark'?'light':'light'}`}>
                 <h2 className='mt-3'>Text Preview</h2>
-                <p>{text.length?text:"Enter something to Preview"}</p>
+                <p>{text.length?text:"Nothing to preview"}</p>
            </div>
         </div>
     </>
